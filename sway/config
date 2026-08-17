@@ -239,6 +239,9 @@ bar {
 
 include /etc/sway/config.d/*
 
+default_border pixel 0
+gaps inner 50
+gaps outer 50
+set $test_marker this_should_fail
 
-gaps outer 15
-gaps inner 15
+

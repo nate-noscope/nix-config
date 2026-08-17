@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -37,15 +38,16 @@
   # useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  programs.sway = {
-   enable = true;
-   wrapperFeatures.gtk = true;
-  };
   
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+  xdg.configFile."sway/config".source = ./sway/config;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -61,6 +63,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  home-manager.users.nixuser = import ./home.nix;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nixuser = {
     isNormalUser = true;
@@ -76,10 +79,11 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     git
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
     librewolf
     fastfetch
     rofi
+    godot
     tmux
     ripgrep
     fd
@@ -87,9 +91,41 @@
     bat
     btop
     wl-clipboard
+    python3
+    gcc
+    gnumake
+    gdb
+    cmake
+    clang-tools
   ];
+  
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.iosevka
+    nerd-fonts.fira-code
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.hack
+    nerd-fonts.monaspace
+  ];
+  
+  programs.neovim = {
+    enable = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
+    configure = {
+      packages.all.start = with pkgs.vimPlugins; [
+        (nvim-treesitter.withPlugins (p: [
+          p.nix
+          p.lua
+          p.markdown
+          p.python
+          p.c
+          p.cpp
+          p.gdscript
+        ]))
+      ];
+    };
+  };
+# Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
