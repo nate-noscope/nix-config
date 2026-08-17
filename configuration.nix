@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -47,7 +46,6 @@
     enable = true;
     wrapperFeatures.gtk = true;
   };
-  xdg.configFile."sway/config".source = ./sway/config;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

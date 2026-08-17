@@ -6,12 +6,17 @@
 
   home.stateVersion = "26.05";
 
-  home.packages = with pkgs; [
-    tmux
-    btop
-  ];
-
-  xdg.configFile."sway/config".source = ./sway/config;
-
   xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
+
+  home.packages = with pkgs; [
+    neovim
+    tmux
+    ripgrep
+    fd
+    fzf
+    bat
+    btop
+    fastfetch
+    librewolf
+  ];
 }
