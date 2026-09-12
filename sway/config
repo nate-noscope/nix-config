@@ -43,13 +43,10 @@ output * bg /run/current-system/sw/share/backgrounds/sway/Sway_Wallpaper_Blue_19
 #
 # Example configuration:
 #
-#   input type:touchpad {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
+input type:touchpad {
+  dwt disabled
+}
+
 input type:keyboard {
   xkb_options caps:escape
   repeat_delay 300
@@ -180,10 +177,10 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left resize grow width 10px
+    bindsym $down resize shrink height 10px
+    bindsym $up resize grow height 10px
+    bindsym $right resize shrink width 10px
 
     # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
@@ -219,29 +216,12 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
+# Open rofi with super key:
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+  bindsym --release Super_L exec rofi -show drun
 
 include /etc/sway/config.d/*
 
-default_border pixel 0
-gaps inner 50
-gaps outer 50
-set $test_marker this_should_fail
-
+gaps outer 0
+gaps inner 8
 

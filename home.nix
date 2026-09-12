@@ -7,6 +7,33 @@
   home.stateVersion = "26.05";
 
   xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
+  xdg.configFile."sway/config" = {
+    source = config.lib.file.mkOutOfStoreSymlink
+      "/home/nixuser/nix-config/sway/config";
+  };
+
+  # programs.nixvim.imports = [ ./nixvim.nix ];
+
+  programs.git = {
+    enable = true;
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
+  };
+  
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a"; 
+  };
+
+
 
   home.packages = with pkgs; [
     neovim
@@ -18,5 +45,6 @@
     btop
     fastfetch
     librewolf
+    localsend
   ];
 }

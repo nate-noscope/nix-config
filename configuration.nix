@@ -10,6 +10,11 @@
       ./hardware-configuration.nix
     ];
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -17,19 +22,12 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "thinkpad"; #Define your hostname.
+  networking.hostName = "thinkpad";
 
-  # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   # font = "Lat2-Terminus16";
@@ -37,44 +35,70 @@
   # useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
   };
 
-  # Enable CUPS to print documents.
   services.printing.enable = true;
+  
+  fonts.packages = with pkgs; [
+    iosevka
+  ];
+  fonts.fontconfig.defaultFonts = {
+    monospace = ["Iosevka" ];
+  };
 
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
+  programs.foot = {
+    enable = true;
+    settings.main.font = "Iosevka:size=12";
+  };
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 33 * 1024;
+  }];
 
   home-manager.users.nixuser = import ./home.nix;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  
+  programs.zsh.enable = true;
+
   users.users.nixuser = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; 
     packages = with pkgs; [
       tree
     ];
+    shell = pkgs.zsh;
   };
 
-  # programs.firefox.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
+  programs.steam.enable = true;
+
+  services.tlp = {
+  enable = true;
+
+  settings = {
+    START_CHARGE_THRESH_BAT0 = 75;
+    STOP_CHARGE_THRESH_BAT0 = 80;
+    CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+    CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+    CPU_ENERGY_PERF_POLICY_ON_AC = "power";
+    CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+    PLATFORM_PROFILE_ON_AC = "low-power";
+    PLATFORM_PROFILE_ON_BAT = "low-power";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     git
     neovim
@@ -95,52 +119,10 @@
     gdb
     cmake
     clang-tools
+    tlp
+    steam
   ];
   
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.iosevka
-    nerd-fonts.fira-code
-    nerd-fonts.caskaydia-cove
-    nerd-fonts.hack
-    nerd-fonts.monaspace
-  ];
-  
-  programs.neovim = {
-    enable = true;
-
-    configure = {
-      packages.all.start = with pkgs.vimPlugins; [
-        (nvim-treesitter.withPlugins (p: [
-          p.nix
-          p.lua
-          p.markdown
-          p.python
-          p.c
-          p.cpp
-          p.gdscript
-        ]))
-      ];
-    };
-  };
-# Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -167,4 +149,3 @@
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-
