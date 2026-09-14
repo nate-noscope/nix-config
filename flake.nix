@@ -12,7 +12,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, home-manager, nixvim, ... }: {
     nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
@@ -20,6 +20,9 @@
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
+          home-manager.sharedModules = [
+            nixvim.homeModules.nixvim
+          ];
           home-manager.users.nixuser = import ./home.nix;
         }
       ];

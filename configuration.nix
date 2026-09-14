@@ -121,6 +121,7 @@
     clang-tools
     tlp
     steam
+    fprintd
   ];
   
 

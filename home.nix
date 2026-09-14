@@ -6,17 +6,16 @@
 
   home.stateVersion = "26.05";
 
-  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
   xdg.configFile."sway/config" = {
     source = config.lib.file.mkOutOfStoreSymlink
       "/home/nixuser/nix-config/sway/config";
   };
 
-  # programs.nixvim.imports = [ ./nixvim.nix ];
+  programs.nixvim.imports = [ ./nvim/nixvim.nix ];
 
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
     };
   };
