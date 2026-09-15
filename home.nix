@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, opencode, ... }:
 
 {
   home.username = "nixuser";
@@ -19,7 +19,7 @@
       init.defaultBranch = "main";
     };
   };
-  
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -29,10 +29,8 @@
 
   programs.tmux = {
     enable = true;
-    prefix = "C-a"; 
+    prefix = "C-a";
   };
-
-
 
   home.packages = with pkgs; [
     neovim
@@ -45,5 +43,7 @@
     fastfetch
     librewolf
     localsend
+
+    opencode.packages.${pkgs.system}.default
   ];
 }

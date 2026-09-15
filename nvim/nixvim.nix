@@ -5,23 +5,20 @@
     clipboard = "unnamedplus";
   };
 
-  extraPackages = with pkgs; [ wl-clipboard ];
+  extraPackages = with pkgs; [
+    wl-clipboard
+    pyright
+    typescript-language-server
+    nil
+    clang-tools
+    jdt-language-server
+  ];
 
   plugins.treesitter = {
     enable = true;
     settings.ensure_installed = [ "python" "typescript" "nix" "c" "cpp" "java" ];
   };
 
-  plugins.lsp = {
-  enable = true;
-  servers = {
-    pyright.enable = true;
-    ts_ls.enable = true;
-    nil_ls.enable = true;
-    clangd.enable = true;
-    jdtls.enable = true;
-  };
-  };
   plugins.blink-cmp = {
     enable = true;
     settings = {
@@ -34,6 +31,17 @@
       sources = {
         default = [ "lsp" "path" "buffer" ];
       };
+    };
+  };
+
+  plugins.lsp = {
+    enable = true;
+    servers = {
+      pyright.enable = true;
+      ts_ls.enable = true;
+      nil_ls.enable = true;
+      clangd.enable = true;
+      jdtls.enable = true;
     };
   };
 }

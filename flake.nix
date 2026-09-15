@@ -10,9 +10,17 @@
     nixvim = {
       url = "github:nix-community/nixvim";
     };
+
+    opencode.url = "github:anomalyco/opencode";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... }: {
+  outputs = {
+    nixpkgs,
+    home-manager,
+    nixvim,
+    opencode,
+    ...
+  }: {
     nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
@@ -23,7 +31,14 @@
           home-manager.sharedModules = [
             nixvim.homeModules.nixvim
           ];
-          home-manager.users.nixuser = import ./home.nix;
+
+          home-manager.users.nixuser = {
+            imports = [
+              ./home.nix
+            ];
+
+            _module.args.opencode = opencode;
+          };
         }
       ];
     };
