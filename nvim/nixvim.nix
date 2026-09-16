@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   opts = {
@@ -16,7 +16,21 @@
 
   plugins.treesitter = {
     enable = true;
-    settings.ensure_installed = [ "python" "typescript" "nix" "c" "cpp" "java" ];
+    highlight.enable = true;
+    indent.enable = true;
+    settings = {
+      highlight.enable = true;
+      indent.enable = true;
+    };
+    grammarPackages = with config.plugins.treesitter.package.builtGrammars; [
+      python
+      typescript
+      javascript
+      nix
+      c
+      cpp
+      java
+    ];
   };
 
   plugins.blink-cmp = {

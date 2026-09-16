@@ -11,7 +11,13 @@
       "/home/nixuser/nix-config/sway/config";
   };
 
-  programs.nixvim.imports = [ ./nvim/nixvim.nix ];
+  xdg.dataFile."wallpapers/nix-wallpaper.png".source =
+    ./assets/wallpapers/nix-wallpaper.png;
+
+  programs.nixvim = {
+    enable = true;
+    imports = [ ./nvim/nixvim.nix ];
+  };
 
   programs.git = {
     enable = true;
@@ -25,6 +31,12 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    initContent = ''
+    if [ -f "$HOME/.config/secrets/deepseek.env" ]; then
+      source "$HOME/.config/secrets/deepseek.env"
+    fi
+    '';
   };
 
   programs.tmux = {
@@ -33,17 +45,16 @@
   };
 
   home.packages = with pkgs; [
-    neovim
     tmux
     ripgrep
     fd
-    fzf
+    skim
     bat
     btop
     fastfetch
     librewolf
     localsend
 
-    opencode.packages.${pkgs.system}.default
+    opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

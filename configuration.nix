@@ -43,6 +43,10 @@
 
   services.printing.enable = true;
   
+  security.polkit.enable = true;
+  services.fprintd.enable = true;
+  security.pam.services.sudo.fprintAuth = true;
+
   fonts.packages = with pkgs; [
     iosevka
   ];
@@ -65,8 +69,6 @@
     size = 33 * 1024;
   }];
 
-  home-manager.users.nixuser = import ./home.nix;
-  
   programs.zsh.enable = true;
 
   users.users.nixuser = {
@@ -99,9 +101,13 @@
     };
   };
 
+  services.openssh.enable = true;
+  networking.firewall.allowedTCPPorts = [ 22 53317 ];
+  services.tailscale.enable = true;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
   environment.systemPackages = with pkgs; [
     git
-    neovim
     librewolf
     fastfetch
     rofi
@@ -113,6 +119,7 @@
     bat
     btop
     wl-clipboard
+    playerctl
     python3
     gcc
     gnumake
@@ -121,7 +128,6 @@
     clang-tools
     tlp
     steam
-    fprintd
   ];
   
 
