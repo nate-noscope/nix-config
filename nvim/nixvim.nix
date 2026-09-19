@@ -3,7 +3,11 @@
 {
   opts = {
     clipboard = "unnamedplus";
+    number = true;
+    relativenumber = true;
+    swapfile = false;
   };
+
 
   extraPackages = with pkgs; [
     wl-clipboard
