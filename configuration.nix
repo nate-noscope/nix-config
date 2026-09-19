@@ -57,6 +57,7 @@
   programs.foot = {
     enable = true;
     settings.main.font = "Iosevka:size=12";
+    settings."colors-dark".alpha = 0.9;
   };
 
   services.pipewire = {
@@ -110,7 +111,7 @@
     git
     librewolf
     fastfetch
-    rofi
+    fuzzel
     godot
     tmux
     ripgrep

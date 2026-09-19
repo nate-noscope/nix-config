@@ -216,11 +216,13 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-  # Open rofi with super key:
+  # Open fuzzel with super key:
 
-  bindsym --release Super_L exec rofi -show drun
+  bindsym --release Super_L exec fuzzel
 
 include /etc/sway/config.d/*
+
+default_border none
 
 gaps outer 0
 gaps inner 8

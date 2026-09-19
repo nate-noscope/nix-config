@@ -11,6 +11,11 @@
       "/home/nixuser/nix-config/sway/config";
   };
 
+  xdg.configFile."fuzzel/fuzzel.ini" = {
+    source = config.lib.file.mkOutOfStoreSymlink
+      "/home/nixuser/nix-config/fuzzel/fuzzel.ini";
+  };
+
   xdg.dataFile."wallpapers/nix-wallpaper.png".source =
     ./assets/wallpapers/nix-wallpaper.png;
 
