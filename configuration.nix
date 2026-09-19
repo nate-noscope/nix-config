@@ -56,7 +56,8 @@
 
   programs.foot = {
     enable = true;
-    settings.main.font = "Iosevka:size=12";
+    settings.main.font = "Iosevka:size=7.2";
+    settings.main."dpi-aware" = "yes";
     settings."colors-dark".alpha = 0.9;
   };
 
@@ -116,7 +117,6 @@
     tmux
     ripgrep
     fd
-    fzf
     bat
     btop
     wl-clipboard
