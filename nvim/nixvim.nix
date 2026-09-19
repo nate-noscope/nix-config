@@ -8,6 +8,16 @@
     swapfile = false;
   };
 
+  globals.mapleader = " ";
+
+  keymaps = [
+    { mode = "n"; key = "<leader>w"; action = "<cmd>write<CR>";      options.desc = "Write buffer"; }
+    { mode = "n"; key = "<leader>q"; action = "<cmd>quit<CR>";       options.desc = "Quit"; }
+    { mode = "n"; key = "<leader>n"; action = "<cmd>nohlsearch<CR>"; options.desc = "Clear search highlight"; }
+    { mode = "n"; key = "<leader>d"; action.__raw = ''function() vim.diagnostic.open_float() end''; options.desc = "Show LSP diagnostic (float)"; }
+    { mode = "n"; key = "<leader>D"; action.__raw = ''function() vim.diagnostic.jump({ count = 1 }) end''; options.desc = "Next LSP diagnostic"; }
+  ];
+
   highlightOverride = {
     Normal      = { bg = "none"; ctermbg = "none"; };
     NormalFloat = { bg = "none"; ctermbg = "none"; };
