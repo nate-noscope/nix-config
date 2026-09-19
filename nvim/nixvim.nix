@@ -8,6 +8,15 @@
     swapfile = false;
   };
 
+  highlightOverride = {
+    Normal      = { bg = "none"; ctermbg = "none"; };
+    NormalFloat = { bg = "none"; ctermbg = "none"; };
+    NormalNC    = { bg = "none"; ctermbg = "none"; };
+    SignColumn  = { bg = "none"; ctermbg = "none"; };
+    LineNr      = { bg = "none"; ctermbg = "none"; };
+    NonText     = { bg = "none"; ctermbg = "none"; };
+  };
+
 
   extraPackages = with pkgs; [
     wl-clipboard
