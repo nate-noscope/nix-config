@@ -19,11 +19,12 @@
 
     dataFile."wallpapers/nix-wallpaper.png".source =
       ./assets/wallpapers/nix-wallpaper.png;
-    xdg.userDirs = {
+    userDirs = {
       enable = true;
-      documents = "${config.homeDirectory}/documents";
-      download = "${config.homeDirectory}/downloads";
-      projects = "${config.homeDirectory}/projects";
+      documents = "${config.home.homeDirectory}/documents";
+      download = "${config.home.homeDirectory}/downloads";
+      projects = "${config.home.homeDirectory}/projects";
+    };
   };
 
   programs.nixvim = {
