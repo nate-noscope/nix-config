@@ -6,6 +6,9 @@
     number = true;
     relativenumber = true;
     swapfile = false;
+    tabstop = 2;
+    shiftwidth = 2;
+    expandtab = true;
   };
 
   globals.mapleader = " ";
@@ -28,13 +31,14 @@
   };
 
 
-  extraPackages = with pkgs; [
+extraPackages = with pkgs; [
     wl-clipboard
     pyright
     typescript-language-server
     nil
     clang-tools
     jdt-language-server
+    rust-analyzer
   ];
 
   plugins.treesitter = {
@@ -53,7 +57,12 @@
       c
       cpp
       java
+      rust
     ];
+  };
+
+  plugins.sleuth = {
+    enable = true;
   };
 
   plugins.blink-cmp = {
@@ -79,6 +88,11 @@
       nil_ls.enable = true;
       clangd.enable = true;
       jdtls.enable = true;
+      rust_analyzer = {
+      enable = true;
+      installCargo = true;
+      installRustc = true;
+    };
     };
   };
 }
