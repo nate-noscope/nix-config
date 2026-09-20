@@ -135,6 +135,9 @@ input type:keyboard {
 #
 # Layout stuff:
 #
+    # Auto-split new windows so they keep golden-ratio proportions
+    exec autotiling --splitratio 1.5
+
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
