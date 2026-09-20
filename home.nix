@@ -6,18 +6,25 @@
 
   home.stateVersion = "26.05";
 
-  xdg.configFile."sway/config" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/nixuser/nix-config/sway/config";
-  };
+  xdg = {
+    configFile."sway/config" = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "/home/nixuser/nix-config/sway/config";
+    };
+  
+    configFile."fuzzel/fuzzel.ini" = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "/home/nixuser/nix-config/fuzzel/fuzzel.ini";
+    };
 
-  xdg.configFile."fuzzel/fuzzel.ini" = {
-    source = config.lib.file.mkOutOfStoreSymlink
-      "/home/nixuser/nix-config/fuzzel/fuzzel.ini";
+    dataFile."wallpapers/nix-wallpaper.png".source =
+      ./assets/wallpapers/nix-wallpaper.png;
+    xdg.userDirs = {
+      enable = true;
+      documents = "${config.homeDirectory}/documents";
+      download = "${config.homeDirectory}/downloads";
+      projects = "${config.homeDirectory}/projects";
   };
-
-  xdg.dataFile."wallpapers/nix-wallpaper.png".source =
-    ./assets/wallpapers/nix-wallpaper.png;
 
   programs.nixvim = {
     enable = true;
@@ -46,6 +53,7 @@
 
   programs.tmux = {
     enable = true;
+    keyMode = "vi";
     prefix = "C-a";
   };
 
@@ -59,6 +67,7 @@
     fastfetch
     librewolf
     localsend
+    autotiling
 
     opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
