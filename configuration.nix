@@ -45,6 +45,17 @@
     wrapperFeatures.gtk = true;
   };
 
+  services.keyd = {
+    enable = true;
+    keyboards.default.settings = {
+      main = {
+        capslock = "esc";
+        semicolon = ":";
+      };
+      shift.semicolon = ";";
+    };
+  };
+
   services.printing.enable = true;
   
   security.polkit.enable = true;
