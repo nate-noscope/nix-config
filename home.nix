@@ -9,16 +9,17 @@
   xdg = {
     configFile."sway/config" = {
       source = config.lib.file.mkOutOfStoreSymlink
-        "/home/nixuser/nix-config/sway/config";
+        "/home/nixuser/projects/nix-config/sway/config";
     };
   
     configFile."fuzzel/fuzzel.ini" = {
       source = config.lib.file.mkOutOfStoreSymlink
-        "/home/nixuser/nix-config/fuzzel/fuzzel.ini";
+        "/home/nixuser/projects/nix-config/fuzzel/fuzzel.ini";
     };
 
     dataFile."wallpapers/nix-wallpaper.png".source =
       ./assets/wallpapers/nix-wallpaper.png;
+
     userDirs = {
       enable = true;
       documents = "${config.home.homeDirectory}/documents";
@@ -44,12 +45,6 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-
-    initContent = ''
-    if [ -f "$HOME/.config/secrets/deepseek.env" ]; then
-      source "$HOME/.config/secrets/deepseek.env"
-    fi
-    '';
   };
 
   programs.tmux = {
