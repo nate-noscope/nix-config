@@ -14,11 +14,12 @@
   globals.mapleader = " ";
 
   keymaps = [
-    { mode = "n"; key = "<leader>w"; action = "<cmd>write<CR>";      options.desc = "Write buffer"; }
-    { mode = "n"; key = "<leader>q"; action = "<cmd>quit<CR>";       options.desc = "Quit"; }
     { mode = "n"; key = "<leader>n"; action = "<cmd>nohlsearch<CR>"; options.desc = "Clear search highlight"; }
     { mode = "n"; key = "<leader>d"; action.__raw = ''function() vim.diagnostic.open_float() end''; options.desc = "Show LSP diagnostic (float)"; }
     { mode = "n"; key = "<leader>D"; action.__raw = ''function() vim.diagnostic.jump({ count = 1 }) end''; options.desc = "Next LSP diagnostic"; }
+    { mode = "n"; key = "<leader>ff"; action = "<cmd>Telescope find_files<cr>"; options.desc = "Find files with telescope"; }
+    { mode = "n"; key = "<leader>fg"; action = "<cmd>Telescope live_grep<cr>"; options.desc = "Live grep"; }
+    { mode = "n"; key = "<leader>fb"; action = "<cmd>Telescope buffers<cr>"; options.desc = "Find buffers"; }
   ];
 
   highlightOverride = {
@@ -62,6 +63,10 @@ extraPackages = with pkgs; [
   };
 
   plugins.sleuth = {
+    enable = true;
+  };
+
+  plugins.telescope = {
     enable = true;
   };
 
