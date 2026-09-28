@@ -51,6 +51,32 @@
     enable = true;
     keyMode = "vi";
     prefix = "C-a";
+    escapeTime = 10;
+    terminal = "tmux-256color";
+    baseIndex = 1;
+    mouse = true;
+    historyLimit = 50000;
+    focusEvents = true;
+    sensibleOnTop = false;
+    plugins = [
+      pkgs.tmuxPlugins.vim-tmux-navigator
+      pkgs.tmuxPlugins.yank
+    ];
+    extraConfig = ''
+      # True color: tell tmux the outer terminal supports 24-bit RGB
+      set -as terminal-features ",*:RGB"
+
+      # Splits and new windows open in the current pane's directory
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+      bind c new-window -c "#{pane_current_path}"
+
+      # Restore clear-screen: vim-tmux-navigator owns Ctrl+L, so use prefix + Ctrl+L
+      bind C-l send-keys C-l
+
+      # Pressing the prefix twice sends a literal Ctrl+A (readline: start of line)
+      bind C-a send-prefix
+    '';
   };
 
   home.packages = with pkgs; [
