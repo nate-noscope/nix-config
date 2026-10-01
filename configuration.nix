@@ -56,16 +56,19 @@
   services.fprintd.enable = true;
   security.pam.services.sudo.fprintAuth = true;
 
+  services.avahi.enable = true;
+  services.avahi.openFirewall = true;
+
   fonts.packages = with pkgs; [
-    iosevka
+    nerd-fonts.iosevka
   ];
   fonts.fontconfig.defaultFonts = {
-    monospace = ["Iosevka" ];
+    monospace = ["Iosevka Nerd Font" ];
   };
 
   programs.foot = {
     enable = true;
-    settings.main.font = "Iosevka:size=7.2";
+    settings.main.font = "Iosevka Nerd Font:size=7.2";
     settings.main."dpi-aware" = "yes";
     settings."colors-dark".alpha = 0.9;
   };
