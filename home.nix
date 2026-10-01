@@ -47,6 +47,11 @@
     syntaxHighlighting.enable = true;
   };
 
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+  };
+
   programs.tmux = {
     enable = true;
     keyMode = "vi";
