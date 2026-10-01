@@ -14,6 +14,7 @@
   globals.mapleader = " ";
 
   keymaps = [
+    { mode = "n"; key = "-"; action = "<cmd>Oil<cr>"; options.desc = "Open parent dir (oil)"; }
     { mode = "n"; key = "<leader>n"; action = "<cmd>nohlsearch<CR>"; options.desc = "Clear search highlight"; }
     { mode = "n"; key = "<leader>d"; action.__raw = ''function() vim.diagnostic.open_float() end''; options.desc = "Show LSP diagnostic (float)"; }
     { mode = "n"; key = "<leader>D"; action.__raw = ''function() vim.diagnostic.jump({ count = 1 }) end''; options.desc = "Next LSP diagnostic"; }
@@ -32,15 +33,15 @@
   };
 
 
-extraPackages = with pkgs; [
-    wl-clipboard
-    pyright
-    typescript-language-server
-    nil
-    clang-tools
-    jdt-language-server
-    rust-analyzer
-  ];
+  extraPackages = with pkgs; [
+      wl-clipboard
+      pyright
+      typescript-language-server
+      nil
+      clang-tools
+      jdt-language-server
+      rust-analyzer
+    ];
 
   plugins.treesitter = {
     enable = true;
@@ -64,6 +65,13 @@ extraPackages = with pkgs; [
 
   plugins.sleuth = {
     enable = true;
+  };
+
+  plugins.oil = {
+    enable = true;
+    settings.keymaps = {
+      "q" = "actions.close";
+    };
   };
 
   plugins.telescope = {
