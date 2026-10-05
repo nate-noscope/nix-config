@@ -95,7 +95,6 @@
     librewolf
     localsend
     autotiling
-    feh
 
     opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
