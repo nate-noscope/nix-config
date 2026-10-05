@@ -68,7 +68,7 @@
 
   programs.foot = {
     enable = true;
-    settings.main.font = "Iosevka Nerd Font:size=7.2";
+    settings.main.font = "Iosevka Nerd Font:pixelsize=16";
     settings.main."dpi-aware" = "yes";
     settings."colors-dark".alpha = 0.9;
   };
