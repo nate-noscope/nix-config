@@ -94,9 +94,12 @@
     bat
     btop
     fastfetch
+    chafa
+    mpv
     librewolf
     localsend
     autotiling
+    slurp
 
     opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];

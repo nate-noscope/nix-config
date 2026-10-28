@@ -69,30 +69,24 @@
     enable = true;
     highlight.enable = true;
     indent.enable = true;
-    settings = {
-      highlight.enable = true;
-      indent.enable = true;
-    };
-    grammarPackages = with config.plugins.treesitter.package.builtGrammars; [
-      python
-      typescript
-      javascript
-      nix
-      c
-      cpp
-      java
-      rust
-    ];
+    # allGrammars = builtGrammars ++ prebuiltGrammars; the previous
+    # builtGrammars subset was already contained in it.
+    grammarPackages = config.plugins.treesitter.package.allGrammars;
   };
 
   plugins.sleuth = {
     enable = true;
   };
 
+  plugins.web-devicons = {
+    enable = true;
+  };
+
   plugins.oil = {
     enable = true;
-    settings.keymaps = {
-      "q" = "actions.close";
+    settings = {
+      skip_confirm_for_simple_edits = true;
+      keymaps."q" = "actions.close";
     };
   };
 
