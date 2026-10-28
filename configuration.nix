@@ -125,7 +125,6 @@
     librewolf
     fastfetch
     fuzzel
-    godot
     tmux
     ripgrep
     fd
@@ -139,6 +138,7 @@
     gdb
     cmake
     clang-tools
+    zig
     tlp
     steam
   ];
