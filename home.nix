@@ -42,9 +42,11 @@
 
   programs.zsh = {
     enable = true;
+    defaultKeymap = "viins";
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    initContent = "KEYTIMEOUT=1";
   };
 
   programs.eza = {
