@@ -34,10 +34,6 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
 
   services.keyd = {
     enable = true;

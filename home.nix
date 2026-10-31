@@ -7,11 +7,6 @@
   home.stateVersion = "26.05";
 
   xdg = {
-    configFile."sway/config" = {
-      source = config.lib.file.mkOutOfStoreSymlink
-        "/home/nixuser/projects/nix-config/sway/config";
-    };
-  
     configFile."fuzzel/fuzzel.ini" = {
       source = config.lib.file.mkOutOfStoreSymlink
         "/home/nixuser/projects/nix-config/fuzzel/fuzzel.ini";
@@ -100,6 +95,7 @@
     localsend
     autotiling
     slurp
+    pkgs.dwl
 
     opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
